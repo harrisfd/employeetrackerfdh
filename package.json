@@ -1,0 +1,24 @@
+{
+  "name": "employeetrackerfdh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harrisfd/employeetrackerfdh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/harrisfd/employeetrackerfdh/issues"
+  },
+  "homepage": "https://github.com/harrisfd/employeetrackerfdh#readme",
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "mysql": "^2.18.1"
+  }
+}
