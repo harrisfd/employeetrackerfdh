@@ -19,17 +19,15 @@ The following functions created will help a business owner to organized their bu
 
 ## Installation
 
-github: 
+github: https://github.com/harrisfd/employeetrackerfdh
 
 
 ## Usage
-Deployed Link: 
+Walkthrough Video: https://screencast-o-matic.com/watch/crhenAVeHDa
 
-<!-- <img src="./image/NoteTakerFDH.jpg" alt="JPG of the application"/>
+<img src="./images/alltables.jpg" alt="JPG of the application"/>
 
-<img src="./image/Samplescreensot.jpg" alt="JPG of the application"/>
-
-<img src="./image/Samplelist.jpg" alt="JPG of the application"/> -->
+<img src="./images/walkthroughexample.jpg" alt="JPG of the application"/>
 
 ## Roadmap
 
