@@ -186,6 +186,12 @@ function addEmployee() {
             name:"deptmanager",
             message:"What is the manager's name?",
             choices:emplres
+        },
+        {
+            type:"list",
+            name:"roleid",
+            message:"What is the Employee New ID?",
+            choices:roleobj
         }
         ]).then(newname => {
            
