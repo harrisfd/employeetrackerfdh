@@ -84,6 +84,7 @@ function addDepartment() {
         }, (err, res) => {
             if (err) throw err
             console.log("department name added successfully")
+            init()
         })
     })
 
@@ -108,17 +109,18 @@ function addRole() {
             choices: res
         }
         ]).then(newname => {
-           
-            
-            const depobj=res.find(department=>department.name===newname.departmentselection)
+
+
+            const depobj = res.find(department => department.name === newname.departmentselection)
             console.log(depobj)
             connection.query("INSERT INTO role SET ?", {
                 title: newname.rolename,
-                salary:newname.salaryinput,
-                department_id:depobj.id 
+                salary: newname.salaryinput,
+                department_id: depobj.id
             }, (err, res) => {
                 if (err) throw err
                 console.log("Role added successfully")
+                init()
             })
         })
     })
@@ -127,90 +129,87 @@ function addRole() {
 function addEmployee() {
     connection.query("SELECT id, CONCAT(first_name,' ', last_name) AS name FROM employee", (err, emplres) => {
         connection.query("SELECT id,title AS name FROM role", (err, roleres) => {
-        inquirer.prompt([{
-            type: "input",
-            name: "firstname",
-            message: "What is the first name?"
-        },
-        {
-            type: "input",
-            name: "lastname",
-            message: "What is the last name?"
-        },
-        {
-            type: "list",
-            name: "roleselection",
-            message: "What is the Role name?",
-            choices: roleres
-        },
-        {
-            type:"list",
-            name:"deptmanager",
-            message:"What is the manager's name?",
-            choices:emplres
-        }
-        ]).then(newname => {
-           
-            
-            const roleobj=roleres.find(role=>role.name===newname.roleselection)
-            const empobj=emplres.find(employee=>employee.name===newname.deptmanager)
-            
-         
-            connection.query("INSERT INTO employee SET ?", {
-                first_name: newname.firstname,
-                last_name:newname.lastname,
-               role_id:roleobj.id, 
-                manager_id:empobj.id 
-            }, (err, res) => {
-                if (err) throw err
-                console.log("Employee added successfully")
-                init()
+            inquirer.prompt([{
+                type: "input",
+                name: "firstname",
+                message: "What is the first name?"
+            },
+            {
+                type: "input",
+                name: "lastname",
+                message: "What is the last name?"
+            },
+            {
+                type: "list",
+                name: "roleselection",
+                message: "What is the Role name?",
+                choices: roleres
+            },
+            {
+                type: "list",
+                name: "deptmanager",
+                message: "What is the manager's name?",
+                choices: emplres
+            }
+            ]).then(newname => {
+
+
+                const roleobj = roleres.find(role => role.name === newname.roleselection)
+                const empobj = emplres.find(employee => employee.name === newname.deptmanager)
+
+
+                connection.query("INSERT INTO employee SET ?", {
+                    first_name: newname.firstname,
+                    last_name: newname.lastname,
+                    role_id: roleobj.id,
+                    manager_id: empobj.id
+                }, (err, res) => {
+                    if (err) throw err
+                    console.log("Employee added successfully")
+                    init()
+                })
             })
         })
     })
-})
 }
 //which employee do you want to update and what is the employee's new role?
-function addEmployee() {
+function updateEmployeerole() {
     connection.query("SELECT id, CONCAT(first_name,' ', last_name) AS name FROM employee", (err, emplres) => {
         connection.query("SELECT id,title AS name FROM role", (err, roleres) => {
-        inquirer.prompt([
-        {
-            type: "list",
-            name: "roleselection",
-            message: "What is the Role name?",
-            choices: roleres
-        },
-        {
-            type:"list",
-            name:"deptmanager",
-            message:"What is the manager's name?",
-            choices:emplres
-        },
-        {
-            type:"list",
-            name:"roleid",
-            message:"What is the Employee New ID?",
-            choices:roleobj
-        }
-        ]).then(newname => {
-           
-            
-            const roleobj=roleres.find(role=>role.name===newname.roleselection)
-            const empobj=emplres.find(employee=>employee.name===newname.deptmanager)
-            
-         
-            connection.query("INSERT INTO employee SET ?", {
-                first_name: newname.firstname,
-                last_name:newname.lastname,
-               role_id:roleobj.id, 
-                manager_id:empobj.id 
-            }, (err, res) => {
-                if (err) throw err
-                console.log("Employee added successfully")
-                init()
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "roleid",
+                    message: "What is the Employee you want to update?",
+                    choices: emplres
+                },
+                {
+                    type: "list",
+                    name: "roleselection",
+                    message: "What is the Role name?",
+                    choices: roleres
+                },
+
+
+            ]).then(newname => {
+
+                //objects with id and name properties
+                const roleobj = roleres.find(role => role.name === newname.roleselection)
+                const empobj = emplres.find(employee => employee.name === newname.roleid)
+
+
+                connection.query("UPDATE employee SET ? WHERE ?", [{
+
+                    role_id: roleobj.id,
+
+                }, {
+                    id: empobj.id
+                }], (err, res) => {
+                    if (err) throw err
+                    console.log("Employee added successfully")
+                    init()
+                })
             })
         })
     })
-})
 }
